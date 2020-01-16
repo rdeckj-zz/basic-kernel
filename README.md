@@ -23,7 +23,7 @@ gcc -m32 -c kernel.c -o kernel.o
 
 ### Linking the bootstrap + kernel
 ```
-ld -m elf_i386 -T link.ld -o kernel boot.o kernel.o
+ld -m elf_i386 -T link.ld -o basic-kernel boot.o kernel.o
 ```
 
 ## Configuring the bootloader (GRUB2)
