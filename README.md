@@ -13,7 +13,7 @@ This is a basic kernel that can be loaded by GNU GRUB.
 
 ### Assembling the bootstrap code
 ```
-nasm -f elf32 boot.asm boot.o
+nasm -f elf32 boot.asm -o boot.o
 ```
 
 ### Compiling the kernel
