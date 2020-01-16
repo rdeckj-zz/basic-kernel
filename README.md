@@ -18,7 +18,7 @@ nasm -f elf32 boot.asm -o boot.o
 
 ### Compiling the kernel
 ```
-gcc -m32 -c kernel.c kernel.o
+gcc -m32 -c kernel.c -o kernel.o
 ```
 
 ### Linking the bootstrap + kernel
