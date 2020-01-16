@@ -1,6 +1,6 @@
 # basic-kernel
 
-This is a basic kernel that can be loaded by GNU GRUB.
+This is a basic kernel that can be loaded by GNU GRUB2.
 
 ## Prerequisites
 * x86 machine
@@ -9,11 +9,39 @@ This is a basic kernel that can be loaded by GNU GRUB.
 * GCC - Pre-installed on Ubuntu
 * LD (GNU linker) - Pre-installed on Ubuntu
 
+## Generating the executable
+
+### Assembling the bootstrap code
+```
+nasm -f elf32 boot.asm -o boot.o
+```
+
+### Compiling the kernel
+```
+gcc -m32 -c kernel.c -o kernel.o
+```
+
+### Linking the bootstrap + kernel
+```
+ld -m elf_i386 -T link.ld -o kernel boot.o kernel.o
+```
+
+## Configuring the bootloader (GRUB2)
+
+### Add custom GRUB menu entry
+```
+sudo mv 40_custom /etc/grub.d/40_custom
+```
+
+### Regenerate and overwrite grub.cfg
+```
+sudo grub-mkconfig > new-grub.cfg
+sudo mv new-grub.cfg /boot/grub/grub.cfg
+```
+
 ## Resources
 
-### [Multiboot](https://www.gnu.org/software/grub/manual/multiboot/)
-
-#### Header Layout
+#### Multiboot Header Layout
 
 Offset | Type | Field Name | Note
 -------|------|------------|-----
@@ -30,12 +58,9 @@ Offset | Type | Field Name | Note
 40 | u32|	height | if flags[2] is set
 44 | u32|	depth | if flags[2] is set
 
-
-
-
-
----WIP---
-
 ## References
 [OSDev Tutorial](wiki.osdev.org/Bare_Bones)
+
+[Multiboot](https://www.gnu.org/software/grub/manual/multiboot/)
+
 [Kernels 101](arjunsreedhara.org)
