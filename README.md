@@ -58,6 +58,14 @@ Offset | Type | Field Name | Note
 40 | u32|	height | if flags[2] is set
 44 | u32|	depth | if flags[2] is set
 
+#### PS/2 Controller IO Ports
+
+IO Port | Access Type | Purpose
+--------|-------------|--------
+0x60 | Read/Write | Data Port
+0x64 | Read | Status Register
+0x64 | Write | Command Register
+
 ## References
 [OSDev Tutorial](wiki.osdev.org/Bare_Bones)
 
